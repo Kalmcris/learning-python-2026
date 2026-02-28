@@ -1,0 +1,125 @@
+print ("Tu cerveza se llama: \"" + input("¿Cuál es tu fruta favorita? ") + " " + input("¿Cuál es tu color favorito? ") + "\"")
+
+print ("Hola mundo")num1 = 5.8
+print(num1)
+print(type(num1))
+
+#Lo connvierte, simplemente elimina la decimal
+num2 = int(num1)
+print(num2)
+print(type(num2))
+
+edad = input("Dime tu edad: ")
+edad = int(edad)
+
+#esta parte arrojará error pues solo se pueden concatenar integers.
+nueva_edad = 1 + edad
+print(nueva_edad)
+print ("Tu nueva edad va a ser " + nueva_edad)
+mi_numero = 1 + 3
+print (mi_numero +  mi_numero)
+
+print(type (mi_numero))x = 6
+y = 2
+z = 7
+
+print(f"{x} - {y} es igual a {x-y}")
+print(f"{x} + {y} es igual a {x+y}")
+print(f"{x} / {y} es igual a {x/y}")
+print(f"{x} * {y} es igual a {x*y}")
+
+print (f"{z} dividido al piso de {y} es igual a {z//y}")
+print (f"{z} modulo de {y} es igual a {z%y}")
+print (f"{x} elevado a la {y} es igual a {x**y}")
+
+print (f"La raiz cuadrada de {x} es {x**0.5}")
+
+#Calculador de comisiones por ventas hechas en el mes
+nombre = (input("¿Cuál es su nombre? "))
+ventas = (input("¿Cuántas ventas hizo este mes? "))
+comision = float(ventas)
+comision_final = round(comision*13/100,2)
+print (f"Hola {nombre}, su comisión por ventas realizadas este mes son de {comision_final}")
+valor = round(95.66666666)
+print(valor)
+
+print(type(valor))nombre = "Juan"
+print (nombre)
+
+nombre = "Laura"
+print (nombre)texto = "ABCDEFGHIJKLM"
+#fragmento = texto[inicio:fin:paso]
+fragmento = texto[2:5]
+print (fragmento)
+
+#Si quisiera invertir una palabra o texto, sería así:
+#fragmento = texto[::-1]qmi_texto = "Esta es una prueba"
+resultado = mi_texto.rindex("a")
+print(resultado)
+
+# Recordar usar el rindex si por ejemplo quiero la ultima
+# aparicion de una palabra.
+# si quiero una posición directa, es mejor usar []
+mi_lista = ["a", "b", "c"]
+mi_lista2 = ["d", "e", "f"]
+
+resultado = len(mi_lista) #Vemos cantidad de elementos que tiene la lista, en este caso devuelve 3
+print(resultado)
+print(type(mi_lista)) #devuelve el tipo de dato de mi_lista, que es <class 'list'>
+
+mi_lista3 = mi_lista + mi_lista2 #aquí concatenamos las dos listas
+print(mi_lista3)
+
+
+mi_lista3[0] = "x" #aquí cambiamos el primer elemento de la lista por "x"
+print(mi_lista3)
+
+mi_lista3.append("g") #aquí agregamos un nuevo elemento al final de la lista
+print(mi_lista3)
+
+eliminado   = mi_lista3.pop(0) #aquí eliminamos el último elemento de la lista
+print(mi_lista3)
+
+print(eliminado)
+
+lista_desordenada = ["z", "a", "c", "b"]
+lista_desordenada.sort() #aquí ordenamos la lista de forma alfabética
+print(lista_desordenada)#upper() - pasar a mayúsculas
+#lower() - pasar a minúsculas
+#split() - separalo en partes (lista)
+#join() - unir items usando separador
+#find() - encontrar un sub-string
+#replace() - reemplazar un substring
+
+texto = "Este es el texto de Federico"
+
+#resultado = texto.split("t") acá aplicamos el separador "t" y nos devuelve una lista con los elementos separados por ese caracter
+
+a = "Aprender"
+b = "Python"
+c = "es"
+d = "genial"
+e = " ".join([a,b,c,d]) #aquí unimos las palabras usando el espacio como separador
+print(e)
+
+#La unica diferencia entre el método find() y el método index() 
+# es que el primero devuelve -1 si no encuentra el substring, mientras que el segundo lanza una excepción ValueError.
+
+#texto.replace("e","x") aquí reemplazamos 
+# todas las "e" por "x" en el texto originalpoema = """Mil pequeños peces blancos
+como si hirviera el color del agua"""
+
+print ("agua" in poema) #devuelve True si la palabra "agua" está en el poema, de lo contrario devuelve False
+
+print ("sol" not in poema) #devuelve True si la palabra "sol" no está en el poema, de lo contrario devuelve False
+
+print(len(poema)) #devuelve la cantidad de caracteres que tiene el poema, incluyendo espacios y saltos de línea# ¡Hola! Espero que tengas un excelente día.
+print ("Hola a todos")
+
+#Funcion que calcule el área de un circulo
+
+radio = input("Ingrese el radio del circulo: ")
+area = 3.1415 * float(radio) **2
+
+
+print(f"El area de su circulo es: {area}")
