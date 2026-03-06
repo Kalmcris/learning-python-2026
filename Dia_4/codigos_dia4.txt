@@ -1,0 +1,238 @@
+==> Comprension_de_Listas.py <==
+
+#Forma antigua, poco práctica
+#palabra = "python"
+#lista = []
+
+#for letra in palabra:
+#    lista.append(letra)
+
+#print (lista)
+
+#Comprensión de listas, forma moderna y eficiente
+#palabra = "python"
+#lista = [letra for letra in palabra]
+#print(lista)
+
+##
+#lista = [n/2 for n in range (0,21,2) if n *2>10 ]
+#print (lista)
+
+pies = [10,20,30,40,50]
+metros = [p * 3.281 for p in pies]
+print(metros)
+==> Enumerador.py <==
+lista = ["a","b","c"]
+
+
+for item in enumerate(lista):
+    print(item)
+#La función enumerate devuelve una tupla con el índice y el valor de cada elemento de la
+==> Loop_For.py <==
+#lista = ["a", "b", "c"]
+
+#for letra in lista:
+ #   numero_letra = lista.index(letra) + 1
+#    print(f"Letra: {numero_letra }: {letra}")
+
+#lista = ["pablo", "laura", "pedro", "ana"]
+
+#for nombre in lista:
+#    if nombre.startswith("p"):
+#        print(nombre)
+
+#numeros = [1, 2, 3, 4, 5]
+#mi_valor = 0
+#for numero in numeros:
+#    mi_valor = mi_valor + numero
+#print(mi_valor)
+
+
+palabra = "python"
+
+for letra in palabra:
+    print(letra)
+==> Loop_While.py <==
+""""
+monedas = 5
+
+while monedas > 0:
+    print (f"Te quedan {monedas} monedas")
+    monedas -= 1
+else: 
+    print("Ya no te quedan monedas")    
+    """
+
+nombre = input("Introduce tu nombre: ")
+for letra in nombre:
+    if letra == "r":
+        break
+    print (letra)
+==> match.py <==
+serie = "N-02"
+
+#if serie == "N-01":
+#    print("Samsung")
+#elif serie == "N-02":
+#    print("Xiaomi")
+#elif serie == "N-03":
+#    print("Apple")
+#else:
+#    print("No existe ese producto")
+
+#match serie:
+#    case "N-01":
+#        print("Samsung")
+#    case "N-02":
+#        print("Xiaomi")
+#    case "N-03":
+#       print("Apple")
+#    case _:        print("No existe ese producto")
+
+cliente = {"nombre": "Federico", "edad":30, "ciudad": "Madrid"}
+
+pelicula = {"titulo": "Matrix", "ficha_tecnica": {"protagonista": "Keanu Reeves", "director": "Lana Wachowski"}}
+
+elementos = [cliente,pelicula,"libro"]
+
+for e in elementos:
+    match e: 
+        case {"nombre": nombre,
+              "edad" : edad,
+              "ciudad": ciudad}:
+            print("ES un cliente")
+            print(nombre, edad, ciudad)
+        case {"titulo": titulo,
+              "ficha_tecnica": {"protagonista": protagonista,
+                                "director": director}}:
+            print("Es una pelicula")
+            print(titulo, protagonista, director)
+        case _:
+            print("No se que es")
+        
+==> Min_Max.py <==
+#menor = min (57,96,62,64,35)
+#mayor = max (57,96,62,64,35)
+
+#print (menor)
+#print (mayor)
+
+
+#lista = [57,96,62,64,35]
+
+#print (f"El menor es {min(lista)} y el mayor es {max(lista)}")
+
+#nombres = ["Juan", "María", "Pedro"]
+
+#print (min(nombres))
+
+dic = {"C1":45, "C2":11}
+
+print (min(dic.values()))
+==> Operadores_de_Comparación.py <==
+mi_bool = "blanco" == "negro" #esto es sensible a mayúsculas y minúsculas
+
+print(mi_bool)
+==> Operadores_Lógicos.py <==
+mi_bool = 4 < 5 and 5 > 6
+print(mi_bool)
+
+mi_bool2 = 1== 10 or 5 > 3
+print(mi_bool2)
+
+texto = "esta frase es verdadera"
+
+mi_bool3 = ("frase" in texto) and ("falsa" not in texto)
+print(mi_bool3)
+==> Proyecto_Dia_4.py <==
+#Juego de adivinar el número, el programa dará un numero de intentos para 
+#adivinar el número, el programa dará pistas si el número es mayor o menor al número a adivinar
+#Empezaré diciendo que el numero es entre 1 y 100, si el usuario da un numero fuera de ese rango dará un mensaje de error y no contará como intento
+#Si es menor, el programa dirá que es incorrecto y que el número es mayor, si es mayor, el programa dirá que es incorrecto y que el número es menor
+#Si el usuario adivina el número, el programa dirá que es correcto y mostrará el número de intentos que le tomó adivinar el número
+#Si el usuario no adivina el número en el número de intentos, el programa dirá que ha perdido y mostrará el número a adivinar
+import random
+adivinar_numero = random.randint(1, 100)
+print(("Bienvenido al juego de adivinar el número, el número a adivinar está entre 1 y 100," \
+" Cuántos intentos quieres tener? "))
+intentos = int(input())
+
+for i in range(intentos):
+    print (f"Intento número {intentos-i}")
+    numero_usuario = int(input("Ingresa un número: "))
+    if numero_usuario < 1 or numero_usuario > 100:
+        print("Número fuera de rango, por favor ingresa un número entre 1 y 100")
+        continue
+    if numero_usuario < adivinar_numero:
+        print("Incorrecto, el número es mayor")
+    elif numero_usuario > adivinar_numero:
+        print("Incorrecto, el número es menor")
+    else:
+        print(f"Correcto, has adivinado el número {adivinar_numero} en {i+1} intentos")
+        break
+else:
+    print(f"Has perdido, el número a adivinar era {adivinar_numero}, buen intento!")
+==> Random.py <==
+from random import *
+
+#Me entrega un numero entero aleatorio entre 1 y 50
+#aleatorio = randint(1,50)
+#print(aleatorio)
+
+#Me entrega un numero decimal aleatorio entre 1 y 5, con 2 decimales
+#aleatorio = round(uniform(1,5),2)
+#print(aleatorio)
+
+#Me entrega un numero decimal aleatorio entre 0 y 1
+#aleatorio = random()
+#print(aleatorio)
+
+#Me entrega un elemento aleatorio de la lista
+#colores = ["azul", "rojo", "verde", "amarillo"]
+#aleatorio = choice(colores)
+#print(aleatorio)
+
+#Me mezcla los elementos de la lista de forma aleatoria
+numeros = list(range(5,50,5))
+shuffle(numeros)
+print(numeros)
+
+
+==> Rango.py <==
+for numero in range(1,5,2):
+    print(numero)
+#Rango de 1 a 5, con paso de 2, es decir, imprime el 1 y el 3, pero no el 5.
+==> Tomar_Decisiones.py <==
+#mascota = "perro"
+
+#if mascota == "gato":
+#   print("Tienes un gato")
+#elif mascota == "perro":
+#    print("Tienes un perro")
+#else:   
+#    print("No tienes ni un gato ni un perro")
+
+edad = 16
+calificacion = 9
+if edad < 18:
+    print("Eres menor de edad")
+    if calificacion >= 7:
+        print("Aprobado")
+    else:
+        print("No aprobado")
+else:
+    print("Eres mayor de edad")
+==> ZIp.py <==
+nombres = ["Juan", "María", "Pedro"]
+edades = [25, 30, 35]
+ciudades = ["Madrid", "Barcelona", "Valencia"]
+
+
+combinados = list(zip(nombres, edades,ciudades))
+
+for nombre, edad, ciudad in combinados:
+    print(f"{nombre} tiene {edad} años y vive en {ciudad}.")
+
+
+
+
