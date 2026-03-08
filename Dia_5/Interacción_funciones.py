@@ -15,7 +15,7 @@ print(mezclar(palitos))
 def probar_suerte():
     intento = " "
     while intento not in ["1","2","3","4"]:
-        intento = input("Elige un numero del 1 al 4:")
+        intento = input("Elige un numero del 1 al 4:1")
 
     return int(intento)
 
