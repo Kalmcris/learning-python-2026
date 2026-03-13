@@ -11,7 +11,7 @@
 #Compartimentar el código en funciones para cada opción del menú, así el código es más organizado y fácil de leer
 import os 
 from pathlib import Path
-from os import system
+import subprocess
 
 mi_ruta = Path(Path.home(), "Documentos", "CursoPython", "Dia_6", "Recetas")
 
@@ -19,13 +19,13 @@ mi_ruta = Path(Path.home(), "Documentos", "CursoPython", "Dia_6", "Recetas")
 
 def contar_recetas(ruta):
     contador = 0
-    for txt in Path(ruta).glob("**/*.txt"):
+    for _ in Path(ruta).glob("**/*.txt"):
         contador += 1
     return contador
 
 
 def inicio():
-    system('clear')
+    subprocess.run(['clear'])
     print ('*'*50)
     print ('*' *5 +' Bienvenido al administrador de recetas '+ '*' *5 )
     print ('*'*50)
@@ -43,7 +43,9 @@ def inicio():
         print('5. Eliminar categoría')
         print('6. Salir')
         eleccion_menu = input('Opción: ')
-        return eleccion_menu
+        
+    # El return debe ir FUERA del while y convertido a entero
+    return int(eleccion_menu)
 
 
 def mostrar_categorias(ruta):
@@ -61,11 +63,11 @@ def mostrar_categorias(ruta):
 
 def elegir_categoria(lista):
     eleccion_correcta = 'x'
-
     while not eleccion_correcta.isnumeric() or int(eleccion_correcta) not in range(1, len(lista) + 1):
         eleccion_correcta = input('\nElige una categoría: ')
-
-        return lista[int(eleccion_correcta) - 1]
+        
+    # Fuera del while
+    return lista[int(eleccion_correcta) - 1]
 
 def mostrar_recetas(ruta):
     print('Recetas:')
@@ -87,42 +89,95 @@ def elegir_recetas(lista):
 
         return lista[int(eleccion_correcta) - 1]
 
-menu = 0
+def leer_receta(receta):
+    print(Path.read_text(receta))
 
-if menu == 1:
-    mis_categorias = mostrar_categorias(mi_ruta)
-    elegir_categoria(mis_categorias)
-    mis_recetas = mostrar_recetas(mi_ruta)
-    mi_receta =elegir_recetas(mis_recetas)
-    #Leer receta
-    #Volver inicio
-    pass
-elif menu == 2:
-    mis_categorias = mostrar_categorias(mi_ruta)
-    elegir_categoria(mis_categorias)
-    #Escribir nombre de receta
-    #Crear contenido de receta
-    #Volver inicio
-    pass
-elif menu == 3:
-    #Escribir nombre de categoria
-    #Crear carpeta
-    #Volver inicio
-    pass
-elif menu == 4:
-    mis_categorias = mostrar_categorias(mi_ruta)
-    elegir_categoria(mis_categorias)
-    mis_recetas = mostrar_recetas(mi_ruta)
-    mi_receta =elegir_recetas(mis_recetas)
-    #Eliminar receta
-    #Volver inicio
-    pass
-elif menu == 5:
-    mis_categorias = mostrar_categorias(mi_ruta)  #Mostrar categorias
-    elegir_categoria(mis_categorias)
-    #Eliminar carpeta con todo su contenido
-    #Volver inicio
-    pass
-elif menu == 6:
-    #Salir
-    pass
+def crear_receta(ruta):
+    existe = False
+    while not existe:
+        print('Escribe el nombre de tu receta: ')
+        nombre_receta = input() + '.txt'
+        print('Escribe tu nueva receta: ')
+        ruta_nueva = Path(ruta, nombre_receta)
+
+        if not os.path.exists(ruta_nueva):
+            Path.write_text(ruta_nueva, input())
+            print (f'Tu receta {nombre_receta} ha sido creada con éxito')
+            existe = True
+        else:
+            print('Ya existe una receta con ese nombre, elige otro nombre para tu receta')
+        
+def crear_categoria(ruta):
+    existe = False
+    while not existe:
+        print('Escribe el nombre de tu categoría: ')
+        nombre_categoria = input() + '/'
+        print('Escribe tu nueva categoría: ')
+        ruta_nueva = Path(ruta, nombre_categoria)
+
+        if not os.path.exists(ruta_nueva):
+            Path.mkdir(ruta_nueva)
+            print (f'Tu categoría {nombre_categoria} ha sido creada con éxito')
+            existe = True
+        else:
+            print('Ya existe una categoría con ese nombre, elige otro nombre para tu categoría')
+        
+def eliminar_receta(receta):
+    Path(receta).unlink()
+    print(f'La receta {receta} ha sido eliminada con éxito')
+
+def eliminar_categoria(categoria):
+    Path(categoria).rmdir()
+    print(f'La categoría {categoria} ha sido eliminada con éxito')
+
+def volver_inicio():
+    eleccion_regresar = 'x'
+    while eleccion_regresar.lower() not in ['s', 'n']:
+        eleccion_regresar = input('¿Deseas volver al menú principal? (s/n): ')
+        if eleccion_regresar.lower() == 's':
+            return True
+        elif eleccion_regresar.lower() == 'n':
+            return False
+        else:
+            print('Opción no válida, por favor elige "s" para sí o "n" para no.')
+
+
+finalizar_programa = False
+while not finalizar_programa:
+    menu = inicio()
+
+    if menu == 1:
+        mis_categorias = mostrar_categorias(mi_ruta)
+        elegir_categoria(mis_categorias)
+        mis_recetas = mostrar_recetas(mi_ruta)
+        mi_receta =elegir_recetas(mis_recetas)
+        leer_receta(mi_receta)
+        volver_inicio()
+        pass
+    elif menu == 2:
+        mis_categorias = mostrar_categorias(mi_ruta)
+        elegir_categoria(mis_categorias)
+        crear_receta(mis_categorias)
+        volver_inicio()
+        pass
+    elif menu == 3:
+        crear_categoria(mi_ruta)
+        volver_inicio()
+        pass
+    elif menu == 4:
+        mis_categorias = mostrar_categorias(mi_ruta)
+        elegir_categoria(mis_categorias)
+        mis_recetas = mostrar_recetas(mi_ruta)
+        mi_receta =elegir_recetas(mis_recetas)
+        eliminar_receta(mi_receta)
+        volver_inicio()
+        pass
+    elif menu == 5:
+        mis_categorias = mostrar_categorias(mi_ruta)  #Mostrar categorias
+        elegir_categoria(mis_categorias)
+        eliminar_categoria(mis_categorias)
+        volver_inicio()
+        pass
+    elif menu == 6:
+        finalizar_programa = True
+        pass
